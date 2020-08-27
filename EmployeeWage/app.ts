@@ -15,18 +15,7 @@ var totalEmployeeHours = 0
 var totalWorkingDays = 0
 let employeeAttendance;
 
-while (totalEmployeeHours < MAX_HOURS_IN_MONTH && totalWorkingDays < NUMBER_OF_WORKING_DAYS) {
-
-    totalWorkingDays++;
-    employeeAttendance = getWorkingHrs(Math.round(Math.random() * 10) % 3);
-  
-    totalEmployeeHours += employeeHrs;
-}
-
-totalSalary = (totalEmployeeHours * EMPLOYEE_RATE_PER_HR);
-console.log("Wages for a Month :  " + totalSalary);
-
-function getWorkingHrs(attendance:number) {
+let workingHrs = (attendance: number) => {
     switch (attendance) {
         case WORKING_FULL_TIME:
             employeeHrs = 8;
@@ -38,3 +27,20 @@ function getWorkingHrs(attendance:number) {
             employeeHrs = 0;
     }
 }
+
+let calculateDailyWage = (employeeHrs: number) => {
+    var wage = employeeHrs * EMPLOYEE_RATE_PER_HR;
+    console.log("Daily Wage : " +wage)
+}
+
+while (totalEmployeeHours < MAX_HOURS_IN_MONTH && totalWorkingDays < NUMBER_OF_WORKING_DAYS) {
+
+    totalWorkingDays++;
+    employeeAttendance = workingHrs(Math.round(Math.random() * 10) % 3);
+    totalEmployeeHours += employeeHrs;
+    var empDailyWage: Array<number> = [totalEmployeeHours];
+    calculateDailyWage(employeeHrs);
+}
+
+totalSalary = (totalEmployeeHours * EMPLOYEE_RATE_PER_HR);
+console.log("Wages for a Month :  " + totalSalary);
